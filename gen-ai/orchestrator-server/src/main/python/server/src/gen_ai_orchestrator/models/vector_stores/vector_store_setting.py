@@ -13,7 +13,6 @@
 #   limitations under the License.
 #
 """Model for creating BaseVectorStoreSetting."""
-from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -24,8 +23,4 @@ class BaseVectorStoreSetting(BaseModel):
     """A base class for Vector Store Setting."""
 
     provider: VectorStoreProvider = Field(description='The Vector Store Provider.')
-    vector_size: int = Field(
-        description='The size of the embedding vector.', examples=[1536], default=1536,
-        ge=1
-    )
 

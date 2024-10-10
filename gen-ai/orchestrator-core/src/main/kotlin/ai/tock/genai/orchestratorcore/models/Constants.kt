@@ -19,10 +19,12 @@ package ai.tock.genai.orchestratorcore.models
 object Constants {
     const val OPEN_AI = "OpenAI"
     const val AZURE_OPEN_AI_SERVICE = "AzureOpenAIService"
+    const val OLLAMA = "Ollama"
 
     const val LANGFUSE = "Langfuse"
 
     const val OPEN_SEARCH = "OpenSearch"
+    const val PG_VECTOR = "PGVector"
 
     private const val GEN_AI="GenAI"
     private const val GEN_AI_RAG="$GEN_AI/RAG"

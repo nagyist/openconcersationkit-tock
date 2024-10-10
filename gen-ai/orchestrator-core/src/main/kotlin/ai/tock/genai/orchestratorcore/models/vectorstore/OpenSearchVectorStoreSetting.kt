@@ -16,15 +16,35 @@
 
 package ai.tock.genai.orchestratorcore.models.vectorstore
 
+import ai.tock.genai.orchestratorcore.utils.OpenSearchUtils
+
 data class OpenSearchVectorStoreSetting<T>(
+    override val host: String,
+    override val port: Int,
+    override val username: String,
+    override val password: T,
     override val k: Int,
-    override val vectorSize: Int,
-    val host: String,
-    val port: Int,
-    val username: String,
-    val password: T,
 ) : VectorStoreSettingBase<T>(
     provider = VectorStoreProvider.OpenSearch,
-    k = k,
-    vectorSize = vectorSize
+    host = host,
+    port = port,
+    username = username,
+    password = password,
+    k = k
+) {
+
+    override fun normalizeDocumentIndexName(namespace: String, botId: String, indexSessionId: String): String =
+        OpenSearchUtils.normalizeDocumentIndexName(namespace, botId, indexSessionId)
+
+    override fun getDocumentSearchParams(): OpenSearchParams =
+        OpenSearchParams(k = k, filter = null)
+}
+
+data class OpenSearchParams(
+    val k: Int = 4,
+    val filter: List<Term>? = null
+) : DocumentSearchParamsBase(VectorStoreProvider.OpenSearch)
+
+data class Term(
+    val term: Map<String, Any>
 )
