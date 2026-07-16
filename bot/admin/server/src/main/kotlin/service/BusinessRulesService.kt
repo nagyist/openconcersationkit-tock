@@ -110,10 +110,6 @@ object BusinessRulesService {
             throw BadRequestException("Duplicate lexicon group id(s): ${duplicatedIds.joinToString()}")
         }
 
-        if (providedIds.any { it <= 0 }) {
-            throw BadRequestException("Lexicon group ids must be positive")
-        }
-
         var nextId = (existingLexiconGroups.map { it.id } + providedIds).maxOrNull()?.plus(1) ?: 1
 
         return copy(
